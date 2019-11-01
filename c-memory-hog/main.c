@@ -3,7 +3,6 @@
   cause big problems with most machines. Probably a bad idea to run this.
 */
 
-
 /*
   stdlib.h is needed for malloc.
   Why is that? malloc seems fundamental.
