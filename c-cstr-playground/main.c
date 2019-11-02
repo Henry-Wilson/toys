@@ -13,10 +13,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+const int SUCCESS = 0;
 const int FAIL = -1;
-const int MAX_LEN = 36;
+const int MAX_LEN = 36; /* Length of our 'string' */
+const int FULL_BYTE = 256; /* Length of a byte. This should NEVER be edited. */
 
 int findLength(char* pStart);
+int setBytesAscending(char* pStart, int len);
 
 /*
   My little playground.
@@ -32,15 +35,22 @@ int main(){
   memset(test, 'a', MAX_LEN);
   *(test+MAX_LEN) = 0;
 
+/*
   //Find length
   int length = 0;
   length = findLength(test);
+*/
 
-  //print our result to stdout
-  printf("%s\n", test);
-  printf("%s%d\n", "LENTGH OF STRING: ", length);
+  /* Set value with ascending */
+  setBytesAscending(test, MAX_LEN);
 
-  //free our memory slice.
+  /* print our result to stdout */
+  for(int i = 0; i < MAX_LEN; i++){
+    printf("%d ",test[i]);
+  }
+  printf("\n");
+
+  /* free our memory slice. */
   free(test);
 
 }
@@ -52,23 +62,47 @@ int main(){
 */
 int findLength(char* pStart){
 
-  //Fail on null
+  /* Fail on null */
   if (pStart == NULL){
     return FAIL;
   }
 
-  /*
-    Iterate until we find a zero.
-  */
+  /* Iterate until we find a zero. */
   char* pEnd = pStart;
   while (*pEnd != 0){
     pEnd++;
   }
 
-  /*
-    However far we got, that's the length of the string.
-  */
+  /* However far we got, that's the length of the string. */
   int len = pEnd - pStart;
   return len;
 
+}
+
+/*
+  The idea: set each byte one more than the last.
+  Set none of them to zero.
+  This will give us a bunch of data to play with.
+  use full 8 bits. 255-1 values.
+*/
+int setBytesAscending(char* pStart, int len){
+
+  /* Fail on null */
+  if (pStart == NULL){
+    return FAIL;
+  }
+
+  /*
+    While iterating up to length,
+    use our iterator also as a value to set.
+    Modulo 255 to make sure we don't overflow.
+  */
+  int iterator = 0;
+  while (iterator < len){
+    *(pStart + iterator) = (iterator % (FULL_BYTE-1))+1;
+    iterator++;
+  }
+
+  /* We've done our work. Return success. */
+  return SUCCESS;
 }
