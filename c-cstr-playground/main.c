@@ -18,49 +18,81 @@ const int MAX_LEN = 36;
 
 /* My little playground. */
 int main(){
+    /*
+     * Allocate memory,
+     * set all to 'a' so we have some content,
+     * then add a terminating 0.
+     */
+    char* test = (char*) malloc(MAX_LEN);
+    memset(test, 'a', MAX_LEN);
+    *(test+MAX_LEN-1) = 0;
 
-  /*
-   * Allocate memory,
-   * set all to 'a' so we have some content,
-   * then add a terminating 0.
-   */
-  char* test = (char*) malloc(MAX_LEN);
-  memset(test, 'a', MAX_LEN);
-  *(test+MAX_LEN) = 0;
+    /* Find length */
+    int length = findLength(test);
+    printf("Length of string '%s': %d\n", test, length);
 
-  /* Set value with ascending */
-  setBytesAscending(test, MAX_LEN);
+    /* Set value with ascending */
+    printf("\nSet all chars ascending\nRESULT: ");
+    setBytesAscending(test, MAX_LEN);
 
-  /* print our result to stdout */
-  for(int i = 0; i < MAX_LEN; i++){
-    printf("%d ",test[i]);
-  }
-  printf("\n");
 
-  /* free our memory slice. */
-  free(test);
+    /* print our result to stdout */
+    for(int i = 0; i < MAX_LEN; i++){
+        printf("%d ",test[i]);
+    }
+    printf("\n");
 
-   /*
-    * Now let's try something more complicated:
-    * We'll be making an stoi function.
-    */
+    /* free our memory slice. */
+    free(test);
+
+    /*
+     * Now let's try something more complicated:
+     * We'll be making an stoi function.
+     */
     char* intstr = "023";
     char* badintstr = "o23";
+    char* negintstr = "-23";
+    int ival = 0;
+    int* pival = &ival;
 
     /* Test a bad string */
     printf("\n%s\n", "TEST STOI ON BAD STR");
-    printf("STOI TEST: %d\n", mystoi(badintstr));
-    printf("STRING TESTED: %s\n", badintstr);
+    printf("STRING TESTED: '%s'\n", badintstr);
     printf("LENGTH OF: %d\n", findLength(badintstr));
+    if(mystoi(badintstr, pival)){
+        printf("FAIL\n");
+    }
+    printf("STOI TEST: %d\n", ival);
+
 
     /* Test a tricky string */
-    printf("\n%s\n", "TEST STOI ON BAD STR");
-    printf("STOI TEST: %d\n", mystoi(intstr));
-    printf("STRING TESTED: %s\n", intstr);
+    printf("\n%s\n", "TEST STOI ON TRICKY STR");
+    printf("STRING TESTED: '%s'\n", intstr);
     printf("LENGTH OF: %d\n", findLength(intstr));
+    if(mystoi(intstr, pival)){
+        printf("FAIL\n");
+    };
+    printf("STOI TEST: %d\n", ival);
+
+
+    /* Test a negative string */
+    printf("\n%s\n", "TEST STOI ON NEGATIVE STR");
+    printf("STRING TESTED: '%s'\n", negintstr);
+    printf("LENGTH OF: %d\n", findLength(negintstr));
+    if(mystoi_negative_en(negintstr, pival)){
+        printf("FAIL\n");
+    }
+    printf("STOI TEST: %d\n", ival);
 
     /* Test addition */
     char* strA = "123";
     char* strB = "246";
-    printf("\nAddition of strings \"%s\" and \"%s\": %d\n", strA, strB, ( mystoi(strA) + mystoi(strB) ));
+    int valA = 0;
+    int* ptrA = &valA;
+    int valB = 0;
+    int* ptrB = &valB;
+
+    mystoi(strA, ptrA);
+    mystoi(strB, ptrB);
+    printf("\nSUM OF '%s' and '%s' is: %d\n", strA, strB, valA+valB);
 }

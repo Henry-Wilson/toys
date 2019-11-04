@@ -16,6 +16,9 @@ int mychartoi(char c);
 int mypow10(int exp);
 
 /* Transforms a CLEAN string to an integer */
-int mystoi(char* pStart);
+int mystoi(char* pStart, int* value);
+
+/* Same, but works on negative numbers */
+int mystoi_negative_en(char* pStart, int* value);
 
 #endif //STRFC_H

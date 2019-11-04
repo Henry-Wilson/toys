@@ -85,8 +85,9 @@ int mypow10(int exp){
 /*
  * Return the integer value represented
  * by a CLEANLY FORMATTED string.
+ * Note: cleanly formatted implies nonnegative.
  */
-int mystoi(char* pStart){
+int mystoi(char* pStart, int* pint){
     int length = findLength(pStart);
     /*
      * Fail if we couldn't find a length
@@ -123,5 +124,21 @@ int mystoi(char* pStart){
 	coeff /= 10;
     }
 
-    return result;
+    *pint = result;
+    return SUCCESS;
+}
+
+/*
+ * Like the former function
+ * but will correctly parse negative numbers as well.
+ * What should FAIL be???
+ * Ah, we need to re-do these. Pass int ref.
+ */
+int mystoi_negative_en(char* pStart, int* value){
+    if ( *pStart == '-' ){
+        int iret = mystoi(pStart+1, value);
+        *value *= -1;
+        return iret;
+    }
+    return mystoi(pStart, value);
 }
