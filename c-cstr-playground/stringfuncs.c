@@ -7,22 +7,20 @@
  * This is because it will then go look at memory that is not allowed.
  */
 int findLength(char* pStart){
+    /* Fail on null */
+    if (pStart == 0){
+        return FAIL;
+    }
 
-  /* Fail on null */
-  if (pStart == 0){
-    return FAIL;
-  }
+    /* Iterate until we find a zero. */
+    char* pEnd = pStart;
+    while (*pEnd != 0){
+        pEnd++;
+    }
 
-  /* Iterate until we find a zero. */
-  char* pEnd = pStart;
-  while (*pEnd != 0){
-    pEnd++;
-  }
-
-  /* However far we got, that's the length of the string. */
-  int len = pEnd - pStart;
-  return len;
-
+    /* However far we got, that's the length of the string. */
+    int len = pEnd - pStart;
+    return len;
 }
 
 /*
@@ -32,25 +30,24 @@ int findLength(char* pStart){
  * use full 8 bits. 255-1 values.
  */
 int setBytesAscending(char* pStart, int len){
+    /* Fail on null */
+    if (pStart == 0){
+        return FAIL;
+    }
 
-  /* Fail on null */
-  if (pStart == 0){
-    return FAIL;
-  }
+    /*
+     * While iterating up to length,
+     * use our iterator also as a value to set.
+     * Modulo 255 to make sure we don't overflow.
+     */
+    int iterator = 0;
+    while (iterator < len){
+        *(pStart + iterator) = (iterator % (FULL_BYTE-1))+1;
+        iterator++;
+    }
 
-  /*
-   * While iterating up to length,
-   * use our iterator also as a value to set.
-   * Modulo 255 to make sure we don't overflow.
-   */
-  int iterator = 0;
-  while (iterator < len){
-    *(pStart + iterator) = (iterator % (FULL_BYTE-1))+1;
-    iterator++;
-  }
-
-  /* We've done our work. Return success. */
-  return SUCCESS;
+    /* We've done our work. Return success. */
+    return SUCCESS;
 }
 
 /* Return the integer represented by a NUMERAL CHARACTER */
