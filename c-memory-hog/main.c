@@ -18,12 +18,12 @@ const int CHUNK_SIZE = 1;
 
 int main(){
 
-  /* Initialize pointer to null. We will use this many times. */
-  char* test = 0;
+    /* Initialize pointer to null. We will use this many times. */
+    char* test = 0;
 
-  /* We will, FOREVER, allocate new memory to the pointer test. */
-  while(1){
-    test = (char*) malloc(CHUNK_SIZE);
-  }
+    /* We will, FOREVER, allocate new memory to the pointer test. */
+    while(1){
+        test = (char*) malloc(CHUNK_SIZE);
+    }
 
 }
