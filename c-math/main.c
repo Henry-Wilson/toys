@@ -20,5 +20,5 @@ int main(){
     double bad_m = 60.0;
     double bad_n = 30.0;
     double bad_result = bad_m_choose_n(bad_m, bad_n);
-    printf("BAD %d choose %d: %d\n", bad_m, bad_n, bad_result);
+    printf("BAD %lf choose %lf: %lf\n", bad_m, bad_n, bad_result);
 }
