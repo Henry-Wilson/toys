@@ -44,8 +44,11 @@ unsigned long long int m_choose_n(int m, int n){
         //Divide by niter as many times as possible.
         while ( niter > 1 ) {
             //If there's NOT a remainder
-            if ( result % niter == 0) {
-                result = result / niter;
+            //Modulus = A - B * (A / B)
+            unsigned long long int quotient = result / niter;
+            //if ( result % niter == 0) {
+            if ( result - niter * quotient == 0) {
+                result = quotient;
             }
             else{
                 break;
@@ -60,6 +63,8 @@ unsigned long long int m_choose_n(int m, int n){
 
 //Just for comparison. This is the bad function.
 //We'll try a speed comparison some time.
+//Even without a speed comparison, it is seen that
+//rounding errors are present here.
 double bad_m_choose_n( double m, double n ){
     double fm = 1;
     double fmn = 1;
