@@ -15,22 +15,11 @@ void fibonacci(int* pA, int* pB, int term){
     return;
 }
 
-//very efficient m_choose_n algorithm running in unsigned long long space.
-unsigned long long int m_choose_n(int m, int n){
+//very efficient m_choose_n algorithm running in unsigned long space.
+//Very efficient may be an exaggeration. Modulo function is quite slow.
+unsigned long int m_choose_n(int m, int n){
     //Start with a result equal to identity.
-    unsigned long long int result = 1;
-
-    /*
-     * range to multiply by: [m to (m-n))
-     * range to divide by: [n to 1)
-     * 
-     * We ought to check before division if
-     * we are properly divisible. Does modular
-     * arithmetic work in C natively? One must
-     * imagine so, given that it follows
-     * naturally from the addition functions of
-     * all common ALUs.
-     */
+    unsigned long int result = 1;
 
     // M Iterator
     int miter = m;
@@ -45,7 +34,7 @@ unsigned long long int m_choose_n(int m, int n){
         while ( niter > 1 ) {
             //If there's NOT a remainder
             //Modulus = A - B * (A / B)
-            unsigned long long int quotient = result / niter;
+            unsigned long int quotient = result / niter;
             //if ( result % niter == 0) {
             if ( result - niter * quotient == 0) {
                 result = quotient;
@@ -61,10 +50,9 @@ unsigned long long int m_choose_n(int m, int n){
     return result;
 }
 
-//Just for comparison. This is the bad function.
-//We'll try a speed comparison some time.
-//Even without a speed comparison, it is seen that
-//rounding errors are present here.
+//This is a brute force algo written with doubles.
+//While there are small rounding errors at the
+//level of 60 choose 30, this is much faster.
 double bad_m_choose_n( double m, double n ){
     double fm = 1;
     double fmn = 1;
@@ -82,4 +70,29 @@ double bad_m_choose_n( double m, double n ){
 
     double result = fm / (fmn * fn);
     return result; 
+}
+
+/*
+ * This is meant to be a hybrid method. It will run
+ * in double space, eliminatingthe need for modulo
+ * and speeding things up. It will also do piecewise
+ * products and quotients.
+ */
+double hyb_m_choose_n( double m, double n ){
+    int miter = m;
+    int niter = n;
+    int result = 1;
+
+    //Multiply by each miter. Divide when possible.
+    while ( miter > (m-n) || niter > 0) {
+        if( miter > (m-n) ){
+            result = result * miter;
+            miter = miter - 1;
+        }
+        if( niter > 0 ){
+            result = result / niter;
+            niter = niter - 1;
+        }
+    }
+    return result;
 }

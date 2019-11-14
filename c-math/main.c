@@ -14,11 +14,16 @@ int main(){
 
     int m = 60;
     int n = 30;
-    unsigned long long int result = m_choose_n(m,n); // Expect 20 for 6,3
+    unsigned long int result = m_choose_n(m,n); // Expect 20 for 6,3
     printf("%d choose %d : %llu\n", m, n, result);
 
     double bad_m = 60.0;
     double bad_n = 30.0;
     double bad_result = bad_m_choose_n(bad_m, bad_n);
     printf("BAD %lf choose %lf: %lf\n", bad_m, bad_n, bad_result);
+
+    double hyb_m = 60.0;
+    double hyb_n = 30.0;
+    double hyb_result = hyb_m_choose_n(hyb_m, hyb_n);
+    printf("HYB %lf choose %lf: %lf\n", hyb_m, hyb_n, hyb_result);
 }
