@@ -2,7 +2,7 @@
 #define mathtoys_h_INCLUDED
 #include <stdint.h>
 
-#define MNTYPE uint_fast64_t
+#define MNTYPE uint_fast32_t
 
 /* Recursive pointer-based fibonacci implementation */
 void fibonacci(int* pA, int* pB, int term);
