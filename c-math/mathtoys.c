@@ -98,26 +98,25 @@ double bad_m_choose_n( double m, double n ){
 
 /*
  * This is meant to be a hybrid method. It will run
- * in double space, eliminatingthe need for modulo
+ * in double space, eliminating the need for modulo
  * and speeding things up. It will also do piecewise
  * products and quotients.
- *
- * Presently non-functional
  */
 double hyb_m_choose_n( double m, double n ){
-    int miter = m;
-    int niter = n;
-    int result = 1;
+    double miter = m;
+    double niter = n;
+    double result = 1;
 
-    //Divide by each niter
-    while ( niter > 0 ) {
-        result = result / niter;
-        niter = niter - 1;
-    }
     //Multiply by each miter. Divide when possible.
-    while ( miter > (m-n) ) {
+    while ( miter > (m-n) || niter > 0) {
+        if( miter > (m-n) ){
         result = result * miter;
         miter = miter - 1;
+        }
+        if( niter > 0 ){
+        result = result / niter;
+        niter = niter - 1;
+        }
     }
     return result;
 }
