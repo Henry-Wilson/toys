@@ -100,7 +100,7 @@ int mystoi(char* pStart, int* pint){
      * power of ten.
      */
     int result = 0;
-    int coeff = mypow10(length-1); /* -1 because we digit 3 is 100 not 1000 */
+    int coeff = mypow10(length-1); /* -1 because digit 3 is 100 not 1000 */
 
     /*
      * For each char:
@@ -109,28 +109,23 @@ int mystoi(char* pStart, int* pint){
      * add to result var
      */
     for(int i = 0; i < length; i++){
-        int charval = mychartoi( *(pStart + i) );
         /* 
          * If we ever have a bad character, fail altogether.
          * Don't treat it as -1*10^n
          */
+        int charval = mychartoi( *(pStart + i) );
         if (charval == FAIL){
             return FAIL;
         }
-	result += charval * coeff; 
-	coeff /= 10;
+        result += charval * coeff; 
+        coeff /= 10;
     }
 
     *pint = result;
     return SUCCESS;
 }
 
-/*
- * Like the former function
- * but will correctly parse negative numbers as well.
- * What should FAIL be???
- * Ah, we need to re-do these. Pass int ref.
- */
+/* A negative-enabled wrapper for the above func */
 int mystoi_negative_en(char* pStart, int* value){
     if ( *pStart == '-' ){
         int iret = mystoi(pStart+1, value);
