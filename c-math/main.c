@@ -26,4 +26,5 @@ int main(){
     double hyb_n = 30.0;
     double hyb_result = hyb_m_choose_n(hyb_m, hyb_n);
     printf("HYB %lf choose %lf: %lf\n", hyb_m, hyb_n, hyb_result);
+    printf("HYB %lf choose %lf: %X\n", hyb_m, hyb_n, hyb_result);
 }

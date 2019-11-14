@@ -15,8 +15,10 @@ void fibonacci(int* pA, int* pB, int term){
     return;
 }
 
-//very efficient m_choose_n algorithm running in unsigned long space.
-//Very efficient may be an exaggeration. Modulo function is quite slow.
+/*
+ * very efficient m_choose_n algorithm running in unsigned long space.
+ * Very efficient may be an exaggeration. Modulo function is quite slow.
+ */
 unsigned long int m_choose_n(int m, int n){
     //Start with a result equal to identity.
     unsigned long int result = 1;
@@ -49,10 +51,30 @@ unsigned long int m_choose_n(int m, int n){
 
     return result;
 }
+/*
+ * This is slow.
+ * Let's see how we can make it more efficient.
+ *
+ * Do we do modulo to check division even when
+ * there is no more n to divide by? no.
+ *
+ * Do we break the modulo function up into its
+ * constituent parts and store the intermediates?
+ * Yes. This saves some time.
+ *
+ * Do we use raw, unsigned variables for the sake
+ * of speed? Yes. This saves time.
+ *
+ * Could we use c99 fast types? up to 64 bit.
+ * We currently use 32 bit with "long"
+ * Would this be faster? Perhaps.
+ */
 
-//This is a brute force algo written with doubles.
-//While there are small rounding errors at the
-//level of 60 choose 30, this is much faster.
+/*
+ * This is a brute force algo written with doubles.
+ * While there are small rounding errors at the
+ * level of 60 choose 30, this is much faster.
+ */
 double bad_m_choose_n( double m, double n ){
     double fm = 1;
     double fmn = 1;
@@ -77,22 +99,23 @@ double bad_m_choose_n( double m, double n ){
  * in double space, eliminatingthe need for modulo
  * and speeding things up. It will also do piecewise
  * products and quotients.
+ *
+ * Presently non-functional
  */
 double hyb_m_choose_n( double m, double n ){
     int miter = m;
     int niter = n;
     int result = 1;
 
+    //Divide by each niter
+    while ( niter > 0 ) {
+        result = result / niter;
+        niter = niter - 1;
+    }
     //Multiply by each miter. Divide when possible.
-    while ( miter > (m-n) || niter > 0) {
-        if( miter > (m-n) ){
-            result = result * miter;
-            miter = miter - 1;
-        }
-        if( niter > 0 ){
-            result = result / niter;
-            niter = niter - 1;
-        }
+    while ( miter > (m-n) ) {
+        result = result * miter;
+        miter = miter - 1;
     }
     return result;
 }
