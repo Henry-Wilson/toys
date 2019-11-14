@@ -1,3 +1,6 @@
+#include <stdint.h>
+#include "mathtoys.h"
+
 /*
  * Some mathematical toys.
  */
@@ -19,9 +22,9 @@ void fibonacci(int* pA, int* pB, int term){
  * very efficient m_choose_n algorithm running in unsigned long space.
  * Very efficient may be an exaggeration. Modulo function is quite slow.
  */
-unsigned long int m_choose_n(int m, int n){
+MNTYPE m_choose_n(int m, int n){
     //Start with a result equal to identity.
-    unsigned long int result = 1;
+    MNTYPE result = 1;
 
     // M Iterator
     int miter = m;
@@ -36,7 +39,7 @@ unsigned long int m_choose_n(int m, int n){
         while ( niter > 1 ) {
             //If there's NOT a remainder
             //Modulus = A - B * (A / B)
-            unsigned long int quotient = result / niter;
+            MNTYPE quotient = result / niter;
             //if ( result % niter == 0) {
             if ( result - niter * quotient == 0) {
                 result = quotient;
@@ -65,9 +68,8 @@ unsigned long int m_choose_n(int m, int n){
  * Do we use raw, unsigned variables for the sake
  * of speed? Yes. This saves time.
  *
- * Could we use c99 fast types? up to 64 bit.
- * We currently use 32 bit with "long"
- * Would this be faster? Perhaps.
+ * Do we use C99 fast types? Yes, check definition
+ * of MNTYPE in mathtoys.h
  */
 
 /*

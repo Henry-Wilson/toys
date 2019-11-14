@@ -1,6 +1,7 @@
 /* For test of math toys */
 
 #include <stdio.h>
+#include <stdint.h>
 #include "mathtoys.h"
 
 int main(){
@@ -14,7 +15,7 @@ int main(){
 
     int m = 60;
     int n = 30;
-    unsigned long int result = m_choose_n(m,n); // Expect 20 for 6,3
+    MNTYPE result = m_choose_n(m,n); // Expect 20 for 6,3
     printf("%d choose %d : %llu\n", m, n, result);
 
     double bad_m = 60.0;
