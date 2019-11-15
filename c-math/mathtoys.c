@@ -7,6 +7,9 @@
 
 /*
  * Somewhat ugly recursive fib func based on ptrs.
+ * Slower for low order calculations because of
+ * many operators, faster for high order calculations
+ * because of only one recursive call.
  */
 void fibonacci(int* pA, int* pB, int term){
     //We ought to terminate on Zero.
@@ -22,6 +25,9 @@ void fibonacci(int* pA, int* pB, int term){
 
 /*
  * While this is more elengant, it is much slower.
+ * This is slower for high order calculations because
+ * it makes two recursive calls, faster for low order
+ * because it uses two operators only.
  */
 int fib( int n ){
     if ( n <= 2 ) {
