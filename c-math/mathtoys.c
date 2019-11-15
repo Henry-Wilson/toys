@@ -20,8 +20,11 @@ void fibonacci(int* pA, int* pB, int term){
     return;
 }
 
+/*
+ * While this is more elengant, it is much slower.
+ */
 int fib( int n ){
-    if ( n == 1 ) {
+    if ( n <= 2 ) {
         return 1;
     }
 
