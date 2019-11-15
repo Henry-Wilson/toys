@@ -5,7 +5,9 @@
  * Some mathematical toys.
  */
 
-//Simple recursive implementation of a fibonacci sequence.
+/*
+ * Somewhat ugly recursive fib func based on ptrs.
+ */
 void fibonacci(int* pA, int* pB, int term){
     //We ought to terminate on Zero.
     if(!term){
@@ -18,6 +20,14 @@ void fibonacci(int* pA, int* pB, int term){
     return;
 }
 
+int fib( int n ){
+    if ( n == 1 ) {
+        return 1;
+    }
+
+    return (fib(n-1) + fib(n-2));
+}
+
 /*
  * very efficient m_choose_n algorithm running in unsigned long space.
  * Very efficient may be an exaggeration. Modulo function is quite slow.
@@ -27,9 +37,9 @@ MNTYPE m_choose_n(int m, int n){
     MNTYPE result = 1;
 
     // M Iterator
-    int miter = m;
+    MNTYPE miter = m;
     // N Iterator
-    int niter = n;
+    MNTYPE niter = n;
 
     //Multiply by each miter. Divide when possible.
     while ( miter > (m-n) ) {

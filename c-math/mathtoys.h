@@ -7,6 +7,9 @@
 /* Recursive pointer-based fibonacci implementation */
 void fibonacci(int* pA, int* pB, int term);
 
+/* elegant fibonacci function */
+int fib(int n);
+
 /* iterative and efficient m_choose_n algorithm */
 MNTYPE m_choose_n(int m, int n);
 

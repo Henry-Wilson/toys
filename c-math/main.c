@@ -13,6 +13,9 @@ int main(){
     fibonacci(pA, pB, term);
     printf("Fib. Number %d = %d\n", term, B); 
 
+    int fibn = 13;
+    printf("Elegant fib %i = %i\n", fibn, fib(fibn));
+
     int m = 60;
     int n = 30;
     MNTYPE result = m_choose_n(m,n); // Expect 20 for 6,3
