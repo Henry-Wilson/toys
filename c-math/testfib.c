@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "mathtoys.h"
 
-const int LOOPVAR = 100000000;
-const int FIBINDX = 2;
+const int LOOPVAR = 1000;
+const int FIBINDX = 30;
 
 int main(){
     int A = 0;

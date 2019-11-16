@@ -20,6 +20,8 @@ int main(){
     int n = 30;
     MNTYPE result = m_choose_n(m,n); // Expect 20 for 6,3
     printf("%d choose %d : %llu\n", m, n, result);
+    result = best_choose(m,n); // Expect 20 for 6,3
+    printf("BEST %d choose %d : %llu\n", m, n, result);
 
     double bad_m = 60.0;
     double bad_n = 30.0;
